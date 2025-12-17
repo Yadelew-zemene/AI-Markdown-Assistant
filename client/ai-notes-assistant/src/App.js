@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useEffect, useState } from "react";
+import Editor from "./components/Editor";
+import Preview from "./components/Preview";
+import Actions from "./components/Actions";
+import "./App.css";
 
 function App() {
+  const [note, setNote] = useState("");
+  const [aiResult, setAiResult] = useState("");
+  useEffect(() => {
+    const savedNote = localStorage.getItem("note");
+    if (savedNote) {
+      setNote(savedNote);
+    }
+
+  }, []);
+  //save on change
+  useEffect(() => {
+    localStorage.getItem('note', note);
+    
+  }, [note]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h2>AI Markdown Assistant</h2>
+
+      <div className="layout">
+        <Editor note={note} setNote={setNote} />
+        <Preview note={note} />
+      </div>
+
+      <Actions setAiResult={setAiResult} />
+
+      {aiResult && (
+        <div className="ai-result">
+          <h3>AI Result</h3>
+          <p>{aiResult}</p>
+        </div>
+      )}
     </div>
   );
 }

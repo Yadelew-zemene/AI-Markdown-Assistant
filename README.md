@@ -56,13 +56,14 @@ This project was built to:
 ## 📂 Project Structure
 ai-markdown-assistant/
 │
-├── client/        # React frontend
+├──client/ai-notes-assiatnt        # React frontend
 │   ├── src/
 │   │   ├── components/
 │   │   ├── services/
 │   │   ├── App.js
 │   │   └── index.js
 │   └── package.json
+|   |___READMe.md
 │
 ├── server/        # Node.js backend
 │   ├── index.js
