@@ -1,8 +1,9 @@
-const express = require("express");
-const {summarize,rewrite}=require("../controllers/aiController")
+import express from "express";
+import { summarize, rewrite } from "../controllers/aiController.js";
+
 const router = express.Router();
+
 router.post("/summarize", summarize);
-
-
 router.post("/rewrite", rewrite);
-module.exports = router;
+
+export default router;

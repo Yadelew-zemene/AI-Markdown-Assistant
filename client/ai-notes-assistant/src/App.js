@@ -30,7 +30,7 @@ function App() {
         <Preview note={note} />
       </div>
 
-      <Actions setAiResult={setAiResult} />
+      <Actions note={note} setAiResult={setAiResult} />
 
       {aiResult && (
         <div className="ai-result">

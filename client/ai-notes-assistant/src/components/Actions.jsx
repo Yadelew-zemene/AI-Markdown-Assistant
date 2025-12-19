@@ -21,6 +21,7 @@ function Actions({ note, setAiResult }) {
     const data = await res.json();
     setAiResult(data.result);
   };
+  console.log("Sending note:", note);
 
   return (
     <div>
