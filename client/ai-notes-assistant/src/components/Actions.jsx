@@ -1,10 +1,25 @@
-function Actions({ setAiResult }) {
-  const handleSummarize = () => {
-    setAiResult("AI summary will appear here.");
-  };
+function Actions({ note, setAiResult }) {
+  const handleSummarize = async () => {
+  const res = await fetch("http://localhost:5000/api/summarize", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: note }),
+  });
 
-  const handleRewrite = () => {
-    setAiResult("AI rewritten text will appear here.");
+  const data = await res.json();
+  setAiResult(data.result);
+};
+ 
+
+  const handleRewrite= async () => {
+    const res = await fetch("http://localhost:5000/api/rewrite", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: note }),
+    });
+
+    const data = await res.json();
+    setAiResult(data.result);
   };
 
   return (
