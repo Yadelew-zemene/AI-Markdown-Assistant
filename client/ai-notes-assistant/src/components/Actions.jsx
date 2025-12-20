@@ -62,12 +62,46 @@ function Actions({ note, setAiResult }) {
     }
   
   };
+  const handleFileUpload = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    setLoading(true);
+    setError("");
+
+    const res = await fetch("/api/summarize-file", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) throw new Error("Upload failed");
+
+    const data = await res.json();
+    setAiResult(data.result);
+
+  } catch (err) {
+    setError("Failed to summarize file");
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (
     <div className="actions">
-      <button onClick={handleSummarize} disabled={loading !==null}>
-        {loading==="summarize" ? "summarizing..." : "Summarize"}
+  <input
+  type="file"
+  accept=".pdf,.docx"
+  onChange={handleFileUpload}
+      />
+      <br />
+      <hr />
+  <button onClick={handleSummarize} disabled={loading !==null}>
+  {loading==="summarize" ? "summarizing..." : "Summarize"}
       </button>
       <button onClick={handleRewrite} disabled={loading!==null}>{loading=== "rewrite" ?"Rewriting..." : "Rewrite"}</button>
       {error && <p className="error">{error}</p>}

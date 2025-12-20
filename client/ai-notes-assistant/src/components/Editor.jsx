@@ -6,7 +6,7 @@ function Editor({ note, setNote }) {
         rows="12"
         value={note}
         onChange={(e) => setNote(e.target.value)}
-        placeholder="Write your markdown here..."
+        placeholder="Write your markdown here...and please prompt exactly what you want "
       />
     </div>
   );
