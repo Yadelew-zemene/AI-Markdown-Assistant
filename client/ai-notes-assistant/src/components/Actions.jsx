@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 function Actions({ note, setAiResult }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(null);
   const [error,setError]=useState("")
   const handleSummarize = async () => {
     if (!note.trim()) {
@@ -13,7 +13,7 @@ function Actions({ note, setAiResult }) {
     }
     try {
       setError("");
-      setLoading(true);
+      setLoading("summarize");
       
       const res = await fetch("http://localhost:5000/api/summarize", {
         method: "POST",
@@ -31,7 +31,7 @@ function Actions({ note, setAiResult }) {
     
   setError("Something went wrong. Try again.");
     } finally {
-      setLoading(false);
+      setLoading(null);
     }
   };
   
@@ -43,7 +43,7 @@ function Actions({ note, setAiResult }) {
     }
     try {
       setError("");
-      setLoading(true);
+      setLoading("rewrite");
     const res = await fetch("http://localhost:5000/api/rewrite", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,7 +58,7 @@ function Actions({ note, setAiResult }) {
        } catch (err) {
       setError("Something went wrong. Try again.");
     } finally {
-      setLoading(false);
+      setLoading(null);
     }
   
   };
@@ -66,8 +66,10 @@ function Actions({ note, setAiResult }) {
 
   return (
     <div className="actions">
-      <button onClick={handleSummarize} disabled={loading}>{loading?"summarizing...":"Summarize"}</button>
-      <button onClick={handleRewrite} disabled={loading}>{loading ? "Rewriting..." : "Rewrite"}</button>
+      <button onClick={handleSummarize} disabled={loading !==null}>
+        {loading==="summarize" ? "summarizing..." : "Summarize"}
+      </button>
+      <button onClick={handleRewrite} disabled={loading!==null}>{loading=== "rewrite" ?"Rewriting..." : "Rewrite"}</button>
       {error && <p className="error">{error}</p>}
     </div>
   );
