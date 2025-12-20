@@ -100,7 +100,7 @@ function Actions({ note, setAiResult }) {
       />
       <br />
       <hr />
-  <button onClick={handleSummarize} disabled={loading !==null}>
+  <button id="summarize" onClick={handleSummarize} disabled={loading !==null}>
   {loading==="summarize" ? "summarizing..." : "Summarize"}
       </button>
       <button onClick={handleRewrite} disabled={loading!==null}>{loading=== "rewrite" ?"Rewriting..." : "Rewrite"}</button>

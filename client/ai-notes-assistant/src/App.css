@@ -109,12 +109,12 @@ h3 {
 }
 
 /* Summarize Button */
-.actions button:first-child {
+.actions #summarize {
   background: #4f46e5;
   color: white;
 }
 
-.actions button:first-child:hover:not(:disabled) {
+.actions #summarize:hover:not(:disabled) {
   background: #4338ca;
 }
 
