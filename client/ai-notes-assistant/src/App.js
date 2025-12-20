@@ -34,8 +34,9 @@ function App() {
 
       {aiResult && (
         <div className="ai-result">
-          <h3>AI Result</h3>
+          <h3>The AI Result.</h3>
           <p>{aiResult}</p>
+          <button onClick={() => setAiResult("")}>Clear Result</button>
         </div>
       )}
     </div>

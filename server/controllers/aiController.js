@@ -1,9 +1,14 @@
 import OpenAI  from "openai";
 
-const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY});
+// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 
 export const summarize = async (req, res) => {
     try {
+       
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
         const { text } = req.body;
          if (!text) return res.status(400).json({ result: "No text provided" });
         const response = await openai.chat.completions.create({
@@ -25,6 +30,9 @@ export const summarize = async (req, res) => {
 }
 export const rewrite = async (req, res) => {
     try {
+        const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
         const { text } = req.body;
          if (!text) return res.status(400).json({ result: "No text provided" });
         const response = await openai.chat.completions.create({
