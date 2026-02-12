@@ -29,7 +29,8 @@ function Actions({ note, setAiResult }) {
     
   }catch (err) {
     
-  setError("Something went wrong. Try again.");
+  console.error("Frontend fetch error:", err);
+  setError(err.message || "Something went wrong. Try again.");
     } finally {
       setLoading(null);
     }
