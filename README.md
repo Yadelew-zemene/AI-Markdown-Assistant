@@ -1,162 +1,189 @@
 
-
-
-#AI-Markdown-Assistant
+# AI-Markdown-Assistant
 
 A full-stack web application that allows users to write notes in Markdown and use AI to summarize or rewrite them. 
+
 The focus of this project is clean architecture, real-world API usage, and simplicity rather than exaggerated features.
 
 ---
 
-## Features
+## 🚀 Features
 
-*  Write notes using Markdown
-*  Live Markdown preview
-*  AI-powered actions:
+- **Markdown Editor:** Write notes using native Markdown syntax.
+- **Live Preview:** Real-time rendered Markdown preview.
+- **AI-Powered Actions:**
+  - **Summarize:** Generate quick summaries of your notes.
+  - **Rewrite:** Refine and clarify your notes for better readability.
+- **Full-Stack Integration:** Seamless data flow from React → Node.js → Gemini API.
+- **Local Persistence:** Save notes locally using `localStorage`.
+- **User Experience:** Basic loading states and error handling.
 
-  - Summarize notes
-  - Rewrite notes for clarity
-*  Full-stack integration (React → Node.js → OpenAI API)
-*  Save notes locally (localStorage)
-*  Basic loading and error handling
+---
 
+## 🛠 Tech Stack
 
+### Frontend
+- **Framework:** React (Create React App)
+- **Language:** JavaScript (ES6)
+- **HTTP Client:** Axios
+- **Markdown Parsing:** `react-markdown`
+- **Styling:** CSS
 
-## Tech Stack                           
+### Backend
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **AI Integration:** Google Gemini API
+- **Architecture:** REST API
 
-###Frontend
+### Database
+- *Not required for MVP.* Notes are stored directly in the browser using `localStorage` for simplicity.
 
-* React (Create React App)
-* JavaScript (ES6)
-* react-markdown
-* CSS
+---
 
-###Backend
-
-* Node.js
-* Express.js
-* OpenAI API
-
-# Database
-
-* Not required for MVP
-* Notes are stored using localStorage for simplicity
-
-
-
-=>Why This Project
+## 💡 Why This Project
 
 This project was built to:
+- Learn how Large Language Models (LLMs) are integrated into real-world applications.
+- Practice prompt engineering for different AI behaviors.
+- Build a clean full-stack architecture.
+- Understand frontend and backend communication.
 
-* Learn how Large Language Models are integrated into real applications
-* Practice prompt engineering for different AI behaviors
-* Build a clean full-stack architecture
-
+---
 
 ## 📂 Project Structure
+
+```text
 ai-markdown-assistant/
 │
-├──client/ai-notes-assiatnt        # React frontend
+├── client/ai-notes-assistant        # React frontend
 │   ├── src/
 │   │   ├── components/
-│   │   ├── services/
+│   │   │   ├── Actions.jsx
+│   │   │   ├── Editor.jsx
+│   │   │   └── Preview.jsx
 │   │   ├── App.js
 │   │   └── index.js
+│   │
 │   └── package.json
-|   |___READMe.md
 │
-├── server/        # Node.js backend
+├── server/                          # Node.js backend
 │   ├── index.js
 │   ├── routes/
+│   │   └── airoutes.js
 │   ├── controllers/
+│   │   ├── aiController.js
+│   │   └── fileController.js
+│   ├── middleware/
+│   │   └── upload.js
 │   └── package.json
 │
 └── README.md
-
-
- API Endpoints
-
-## Summarize Notes
-POST /api/summarize
-
-Request Body:
-json
-{
-  "text": "Markdown content"
-}
-
-
-#Rewrite Notes
-
-POST /api/rewrite
-
-Request Body:
-
-json
-{
-  "text": "Markdown content"
-}
+```
 
 ---
 
+## 📡 API Endpoints
 
-##Running the Project Locally
+### 1. Summarize Notes
+- **Endpoint:** `POST /api/summarize`
+- **Request Body:**
+  ```json
+  {
+    "text": "Markdown content"
+  }
+  ```
 
-###Clone the Repository
+### 2. Rewrite Notes
+- **Endpoint:** `POST /api/rewrite`
+- **Request Body:**
+  ```json
+  {
+    "text": "Markdown content"
+  }
+  ```
 
+---
+
+## 💻 Running the Project Locally
+
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/ai-markdown-notes.git
-cd ai-markdown-notes
+git clone https://github.com/Yadelew-zemene/AI-Markdown-Assistant.git
+cd AI-Markdown-Assistant
 ```
 
-### Start the Backend
+### 2. Start the Backend
 
+Navigate to the `server` directory and install dependencies:
 ```bash
 cd server
 npm install
-npm start
 ```
 
-### Start the Frontend
+Create a `.env` file inside the `server` directory:
+```env
+GEMINI_API_KEY=your_api_key_here
+```
 
+Start the backend server:
 ```bash
-cd client
+node --env-file=.env index.js
+```
+> **Note:** The backend runs on `http://localhost:5000`. Do not commit your real API key to GitHub.
+
+### 3. Start the Frontend
+
+Open a new terminal window, navigate to the client directory, and start the React application:
+```bash
+cd client/ai-notes-assistant
 npm install
 npm start
-
-
-Frontend runs on `http://localhost:3000`
-Backend runs on `http://localhost:5000`
-
-
-###Prompt Design (Example)
-
-Summarization Prompt:Summarize the following markdown notes into clear bullet points.
-
-Rewrite Promp:Rewrite the following notes to be clearer and more professional.
-## What I Learned
-
-* Integrating OpenAI API in a backend securely
-* Designing REST APIsfor AI-powered features
-* Basic prompt engineering techniques
-* Managing frontend and backend communication
-* Building a complete project from idea to implementation
-## Possible Improvements 
-
-* User authentication
-* Save notes in a database (mySql)
-* Multiple notes per user
-* Tone selection (formal, simple, detailed)
-* Export notes as PDF
+```
+> The frontend runs on `http://localhost:3000`.
 
 ---
 
- ##👤 Author
+## 🧠 Prompt Design
 
-**Yadelew Zemene Abay**
-A Computer Science Student
-Interested in Full‑Stack Development and AI‑powered web applications
+### Summarization Prompt
+> *"Summarize these markdown notes in bullet points."*
+
+### Rewrite Prompt
+> *"Rewrite these markdown notes clearly and professionally."*
+
+---
+
+## 📚 What I Learned
+
+- Securing and integrating the Gemini API into a Node.js backend.
+- Designing clean REST APIs for AI-driven features.
+- Practicing basic prompt engineering techniques.
+- Managing client-server asynchronous communication.
+- Handling asynchronous AI requests effectively.
+- Building a complete project end-to-end from initial idea to implementation.
+
+---
+
+## 🔮 Possible Improvements
+
+- [ ] Add User authentication.
+- [ ] Save notes in a database (e.g., MySQL).
+- [ ] Support multiple notes per user.
+- [ ] Add tone selection (formal, simple, detailed).
+- [ ] Include more AI writing tools.
+- [ ] Export notes to PDF format.
+- [ ] Enable cloud synchronization.
+
+---
+
+## 👤 Author
+
+**Yadelew Zemene Abay**  
+*Computer Science Student*  
+Interested in Full-Stack Development and AI-powered web applications.
+
+---
 
 ## 📄 License
 
-This project is for educational and portfolio purposes.
+This project is created for educational and portfolio purposes.
